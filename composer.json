@@ -1,0 +1,19 @@
+{
+    "name": "zlb/zlb-api-sdk",
+    "description": "zlb-sdk",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "wt",
+            "email": "541575093@qq.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zlb\\SDK\\": "src/"
+        }
+    }
+}
