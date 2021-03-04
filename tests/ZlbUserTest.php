@@ -11,16 +11,22 @@
 
 namespace Zlb\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Zlb\SDK\ZlbUser;
 
-class ZlbUserTest extends ZlbBaseTest
+class ZlbUserTest extends TestCase
 {
+
+    protected $aesKey = 'cbf3ba46288b4c62';
+    protected $aesIv = '28e7460e8d2f49f5';
+    protected $sign = '388113c8f5ba5cbc';
+    protected $zlbUrl = 'http://api.localtest.zlbzb.cn';
 
     protected $zlbUser;
     protected $zlbMobile = '15011122200';
     protected $zlbPassword = '123456';
     protected $auth = '497b4b9bea6347f8';
-    protected $returnUrl = 'http://wt.frp.malfoy.cn:1996/api/zlb/testEnv';
+    protected $returnUrl = 'https://baidu.com';
 
     protected function setUp(): void
     {

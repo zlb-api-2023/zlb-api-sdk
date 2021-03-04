@@ -11,10 +11,16 @@
 
 namespace Zlb\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Zlb\SDK\ZlbDictionaries;
 
-class ZlbDictionariesTest extends ZlbBaseTest
+class ZlbDictionariesTest extends TestCase
 {
+
+    protected $aesKey = 'cbf3ba46288b4c62';
+    protected $aesIv = '28e7460e8d2f49f5';
+    protected $sign = '388113c8f5ba5cbc';
+    protected $zlbUrl = 'http://api.localtest.zlbzb.cn';
 
     protected $zlbDictionaries;
 
