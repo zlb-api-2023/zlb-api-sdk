@@ -15,6 +15,9 @@ class ZlbHttpEnum
     // 注册个人用户
     const REGISTER_PERSONAL_USER = '/fe/api/register';
 
+    // 注册个人用户
+    const PERSONAL_USER_AUTH = '/fe/api/getAuth';
+
     // 个人实名认证地址获取
     const GET_PERSONAL_AUTH = '/fe/api/auth/personal';
 

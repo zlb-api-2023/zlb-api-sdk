@@ -44,6 +44,23 @@ class ZlbUser extends ZlbBase
     }
 
     /**
+     * 获取个人用户的auth
+     * @param string $mobile
+     * @param string $password
+     * @return array
+     */
+    public function getPersonalUserAuth(string $mobile, string $password): array
+    {
+        $url = $this->url . ZlbHttpEnum::PERSONAL_USER_AUTH;
+        $data = [
+            'mobile' => $mobile,
+            'password' => $password,
+        ];
+
+        return $this->sendRequest($url, $data, $this->sign);
+    }
+
+    /**
      * 个人用户实名认证地址获取
      * @param string $auth 个人用户注册后data返回的auth
      * @param string $returnUrl 实名认证成功后 回调的地址
@@ -90,7 +107,7 @@ class ZlbUser extends ZlbBase
      * @param string|null $fullTimeWork 全职工作
      * @return array
      */
-    public function perfectPersonalInfoUnitTest(string $auth,
+    public function perfectPersonalInfo(string $auth,
                                                 string $bankName,
                                                 string $bankAccount,
                                                 string $provinceId,
