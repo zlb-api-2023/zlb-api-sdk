@@ -53,7 +53,9 @@ class ZlbFastTaskTest extends TestCase
                 'note' => '测试',
                 'attachmentIds' => [
                     "1342715461476814850"
-                ]
+                ],
+                'appid' => '',// 微信收款账户appid
+                'openid' => '',// 微信收款账户openid
             ]
         ];
         $taskObj = [
