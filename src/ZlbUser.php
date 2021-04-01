@@ -77,6 +77,23 @@ class ZlbUser extends ZlbBase
         return $this->sendRequest($url, $data, $this->sign);
     }
 
+    /**
+     * 个人用户实名认证地址获取（页面）
+     * @param string $auth 个人用户注册后data返回的auth
+     * @param string $returnUrl 实名认证成功后 回调的地址
+     * @return array
+     */
+    public function getPersonalAuthH5Url(string $auth, string $returnUrl): array
+    {
+        $url = $this->url . ZlbHttpEnum::GET_PERSONAL_TOKEN_INFO;
+        $data = [
+            'auth' => $auth,
+            'returnUrl' => urlencode($returnUrl),
+        ];
+
+        return $this->sendRequest($url, $data, $this->sign);
+    }
+
 
     /**
      * 个人用户实名认证状态查询

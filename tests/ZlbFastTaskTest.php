@@ -17,9 +17,9 @@ use Zlb\SDK\ZlbFastTask;
 class ZlbFastTaskTest extends TestCase
 {
 
-    protected $aesKey = 'cbf3ba46288b4c62';
-    protected $aesIv = '28e7460e8d2f49f5';
-    protected $sign = '388113c8f5ba5cbc';
+    protected $aesKey = '6fe2260374e14099';
+    protected $aesIv = 'f4c43522801949ff';
+    protected $sign = '18137af8210f9977';
     protected $zlbUrl = 'http://api.localtest.zlbzb.cn';
 
     protected $zlbFastTask;

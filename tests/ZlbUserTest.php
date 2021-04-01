@@ -17,15 +17,15 @@ use Zlb\SDK\ZlbUser;
 class ZlbUserTest extends TestCase
 {
 
-    protected $aesKey = 'cbf3ba46288b4c62';
-    protected $aesIv = '28e7460e8d2f49f5';
-    protected $sign = '388113c8f5ba5cbc';
+    protected $aesKey = '6fe2260374e14099';
+    protected $aesIv = 'f4c43522801949ff';
+    protected $sign = '18137af8210f9977';
     protected $zlbUrl = 'http://api.localtest.zlbzb.cn';
 
     protected $zlbUser;
-    protected $zlbMobile = '15011122200';
+    protected $zlbMobile = '15600000012';
     protected $zlbPassword = '123456';
-    protected $auth = '497b4b9bea6347f8';
+    protected $auth = 'f141a4635bc24185';
     protected $returnUrl = 'https://baidu.com';
 
     protected function setUp(): void
@@ -61,6 +61,18 @@ class ZlbUserTest extends TestCase
     {
         $response = $this->zlbUser->getPersonalAuthUrl($this->auth, $this->returnUrl);
 
+        echo json_encode($response,JSON_UNESCAPED_UNICODE);
+
+        $this->assertArrayHasKey('code', $response);
+        $this->assertEquals(10000, $response['code']);
+
+    }
+
+    public function testGetPersonalAuthH5Url()
+    {
+        $response = $this->zlbUser->getPersonalAuthH5Url($this->auth, $this->returnUrl);
+
+        echo $response['data'] . PHP_EOL;
         echo json_encode($response,JSON_UNESCAPED_UNICODE);
 
         $this->assertArrayHasKey('code', $response);
