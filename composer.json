@@ -1,6 +1,9 @@
 {
     "name": "zlb/zlb-api-sdk",
     "description": "zlb-sdk",
+    "keywords": [
+        "zlb"
+    ],
     "license": "MIT",
     "authors": [
         {
