@@ -27,12 +27,12 @@ class ZlbUser extends ZlbBase
     }
 
     /**
-     * 注册个人用户
+     * 注册个人用户并获取auth
      * @param string $mobile
-     * @param string $password
+     * @param string|null $password 密码（不传的话系统随机生成密码）
      * @return array
      */
-    public function register(string $mobile, string $password): array
+    public function register(string $mobile, ?string $password = null): array
     {
         $url = $this->url . ZlbHttpEnum::REGISTER_PERSONAL_USER;
         $data = [
@@ -112,7 +112,7 @@ class ZlbUser extends ZlbBase
 
 
     /**
-     * 个人用户实名认证状态查询
+     * 完善个人信息和银行卡信息
      * @param string $auth 个人用户注册后data返回的auth
      * @param string $bankName 开户行名称
      * @param string $bankAccount 开户行账号
@@ -225,6 +225,21 @@ class ZlbUser extends ZlbBase
     public function getPersonRealInfo(string $auth): array
     {
         $url = $this->url . ZlbHttpEnum::GET_USERINFO;
+        $data = [
+            'auth' => $auth,
+        ];
+
+        return $this->sendRequest($url, $data, $this->sign);
+    }
+
+    /**
+     * 获取个人银行卡信息
+     * @param string $auth 个人用户注册后data返回的auth
+     * @return array
+     */
+    public function getUserBankInfo(string $auth): array
+    {
+        $url = $this->url . ZlbHttpEnum::GET_USER_BANK_INFO;
         $data = [
             'auth' => $auth,
         ];

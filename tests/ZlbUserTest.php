@@ -160,4 +160,14 @@ class ZlbUserTest extends TestCase
         $this->assertArrayHasKey('code', $response);
 
     }
+
+    public function testGetUserBankInfo()
+    {
+        $response = $this->zlbUser->getUserBankInfo($this->auth);
+
+        echo json_encode($response,JSON_UNESCAPED_UNICODE);
+
+        $this->assertArrayHasKey('code', $response);
+
+    }
 }

@@ -87,4 +87,7 @@ class ZlbHttpEnum
     // 获取个人用户实名信息
     const GET_USERINFO = '/fe/api/getUserInfo';
 
+    // 获取个人银行卡信息
+    const GET_USER_BANK_INFO = '/fe/api/getUserBankInfo';
+
 }
