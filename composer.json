@@ -17,6 +17,11 @@
     "require-dev": {
         "phpunit/phpunit": "*"
     },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
     "autoload": {
         "psr-4": {
             "Zlb\\SDK\\": "src/"
