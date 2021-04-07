@@ -27,7 +27,7 @@ class ZlbUser extends ZlbBase
     }
 
     /**
-     * 注册个人用户并获取auth
+     * 注册个人用户并获取auth（如果用户已注册并且属于当前企业邀请的则直接返回auth）
      * @param string $mobile
      * @param string|null $password 密码（不传的话系统随机生成密码）
      * @return array
