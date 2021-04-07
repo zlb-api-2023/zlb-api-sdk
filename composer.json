@@ -14,12 +14,6 @@
     "require-dev": {
         "phpunit/phpunit": "*"
     },
-    "version": "1.0.2",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.x-dev"
-        }
-    },
     "autoload": {
         "psr-4": {
             "Zlb\\SDK\\": "src/"
@@ -28,6 +22,8 @@
     "autoload-dev": {
         "psr-4": { "Zlb\\Tests\\": "tests/" }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "test": "vendor/bin/phpunit"
     }
