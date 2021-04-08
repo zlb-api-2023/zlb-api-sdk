@@ -85,7 +85,7 @@ class ZlbUser extends ZlbBase
      */
     public function getPersonalAuthH5Url(string $auth, string $returnUrl): array
     {
-        $url = $this->url . ZlbHttpEnum::GET_PERSONAL_TOKEN_INFO;
+        $url = $this->url . ZlbHttpEnum::GET_PERSONAL_AUTH_URL;
         $data = [
             'auth' => $auth,
             'returnUrl' => urlencode($returnUrl),

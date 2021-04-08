@@ -22,7 +22,7 @@ class ZlbHttpEnum
     const GET_PERSONAL_AUTH = '/fe/api/auth/personal';
 
     // 个人实名认证地址获取
-    const GET_PERSONAL_TOKEN_INFO = '/fe/api/getProfessionalToken';
+    const GET_PERSONAL_AUTH_URL = '/fe/api/professional/getAuthUrl';
 
     // 个人认证状态查询
     const GET_AUTH_STATE = '/fe/api/auth/authState';
