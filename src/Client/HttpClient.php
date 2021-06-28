@@ -30,7 +30,7 @@ trait HttpClient
                     'code' => 10000,
                     'succeed' => true,
                     'msg' => '操作成功',
-                    'data' => isset($resultArr['data']) ? json_decode($this->decrypt($resultArr['data']), true) : [],
+                    'data' => isset($resultArr['data']) ? (json_decode($this->decrypt($resultArr['data']), true) ?: $this->decrypt($resultArr['data'])) : [],
                     'error' => null,
                 ];
             } else {
