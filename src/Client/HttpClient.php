@@ -26,11 +26,19 @@ trait HttpClient
         $resultArr = json_decode($result, true);
         if (is_array($resultArr) && count($resultArr) > 0) {
             if (isset($resultArr['succeed']) && $resultArr['succeed']) {
+                $returnData = [];
+                if (!empty($resultArr['data'])){
+                    $decryptData = $this->decrypt($resultArr['data']);
+                    $returnData = json_decode($this->decrypt($resultArr['data']), true);
+                    if (null === $returnData){
+                        $returnData = $decryptData;
+                    }
+                }
                 return [
                     'code' => 10000,
                     'succeed' => true,
                     'msg' => '操作成功',
-                    'data' => isset($resultArr['data']) ? (json_decode($this->decrypt($resultArr['data']), true) ?: $this->decrypt($resultArr['data'])) : [],
+                    'data' => $returnData,
                     'error' => null,
                 ];
             } else {
