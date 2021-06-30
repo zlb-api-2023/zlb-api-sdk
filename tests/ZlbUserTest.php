@@ -24,7 +24,7 @@ class ZlbUserTest extends TestCase
 
     protected $zlbUser;
     protected $zlbMobile = '15600000012';
-    protected $zlbPassword = '123456';
+    protected $zlbPassword = '';
     protected $auth = 'f141a4635bc24185';
     protected $returnUrl = 'https://baidu.com';
 
