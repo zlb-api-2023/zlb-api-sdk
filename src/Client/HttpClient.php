@@ -26,7 +26,7 @@ trait HttpClient
         $resultArr = json_decode($result, true);
         if (is_array($resultArr) && count($resultArr) > 0) {
             if (isset($resultArr['succeed']) && $resultArr['succeed']) {
-                $returnData = [];
+                $returnData = null;
                 if (!empty($resultArr['data'])){
                     $decryptData = $this->decrypt($resultArr['data']);
                     $returnData = json_decode($this->decrypt($resultArr['data']), true);
@@ -46,7 +46,7 @@ trait HttpClient
                     'code' => $resultArr['code'] ?? 100200,
                     'succeed' => false,
                     'msg' => $resultArr['msg'] ?? '操作失败',
-                    'data' => $resultArr['data'] ?? [],
+                    'data' => $resultArr['data'] ?? null,
                     'error' => $resultArr['error'] ?? '操作失败',
                 ];
             }
@@ -77,7 +77,15 @@ trait HttpClient
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 //        curl_setopt($ch, CURLOPT_SSLVERSION, 3);
-//        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        // 超时时间20秒
+        curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+
+        // 最大可重定向次数
+        curl_setopt($ch, CURLOPT_MAXREDIRS, 20);
+
+        // 允许重定向  要在安全模式关闭未设置open_basedir的情况下才能使用
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
