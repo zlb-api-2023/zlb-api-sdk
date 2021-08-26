@@ -5,6 +5,7 @@ namespace Zlb\SDK;
 
 
 use Zlb\SDK\Enum\ZlbHttpEnum;
+use Zlb\SDK\Fields\SubmitProfessionalField;
 
 /**
  * 用户相关
@@ -243,6 +244,21 @@ class ZlbUser extends ZlbBase
         $data = [
             'auth' => $auth,
         ];
+
+        return $this->sendRequest($url, $data, $this->sign);
+    }
+
+    /**
+     * 用户提供认证数据进行认证
+     * @param string $auth 个人用户注册后data返回的auth
+     * @param SubmitProfessionalField $professionalField 实名认证需要的信息
+     * @return array
+     */
+    public function submitProfessional(string $auth, SubmitProfessionalField $professionalField): array
+    {
+        $url = $this->url . ZlbHttpEnum::SUBMIT_PROFESSIONAL;
+        $data = $professionalField->getProfessionalData();
+        $data['auth'] = $auth;
 
         return $this->sendRequest($url, $data, $this->sign);
     }

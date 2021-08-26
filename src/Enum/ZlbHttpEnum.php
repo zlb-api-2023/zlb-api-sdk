@@ -90,4 +90,7 @@ class ZlbHttpEnum
     // 获取个人银行卡信息
     const GET_USER_BANK_INFO = '/fe/api/getUserBankInfo';
 
+    // 用户提供认证数据进行认证
+    const SUBMIT_PROFESSIONAL = '/fe/api/auth/professional';
+
 }

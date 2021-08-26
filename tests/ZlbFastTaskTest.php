@@ -73,8 +73,8 @@ class ZlbFastTaskTest extends TestCase
 
         $invoiceObj = [
             'type' => 1,// 1：专票；2：普票
-            'companyName' => '测试抬头',
-            'companyCode' => '测试纳税人识别号',
+            'companyName' => '测试抬头',// 非必传
+            'companyCode' => '测试纳税人识别号',// 非必传
             'comAddress' => '测试公司详细地址',
             'comTelPhone' => '测试公司联系电话',
             'comBankName' => '测试公司开户行',
