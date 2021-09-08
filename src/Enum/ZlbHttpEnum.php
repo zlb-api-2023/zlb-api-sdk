@@ -93,4 +93,7 @@ class ZlbHttpEnum
     // 用户提供认证数据进行认证
     const SUBMIT_PROFESSIONAL = '/fe/api/auth/professional';
 
+    // 获取用户默认支付信息
+    const GET_USER_PAY_INFO = '/fe/api/getUserPayInfo';
+
 }

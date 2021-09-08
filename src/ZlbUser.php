@@ -262,4 +262,19 @@ class ZlbUser extends ZlbBase
 
         return $this->sendRequest($url, $data, $this->sign);
     }
+
+    /**
+     * 获取用户默认支付信息
+     * @param string $auth 个人用户注册后data返回的auth
+     * @return array
+     */
+    public function getUserPayInfo(string $auth): array
+    {
+        $url = $this->url . ZlbHttpEnum::GET_USER_PAY_INFO;
+        $data = [
+            'auth' => $auth,
+        ];
+
+        return $this->sendRequest($url, $data, $this->sign);
+    }
 }
