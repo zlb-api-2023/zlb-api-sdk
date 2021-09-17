@@ -96,4 +96,7 @@ class ZlbHttpEnum
     // 获取用户默认支付信息
     const GET_USER_PAY_INFO = '/fe/api/getUserPayInfo';
 
+    // 上传个人信息，个人认证时自动回填；
+    const AUTH_ID_CARD_CHECK = '/fe/api/auth/idCardCheck';
+
 }

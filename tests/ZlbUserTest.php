@@ -12,6 +12,8 @@
 namespace Zlb\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Zlb\SDK\Fields\IdCard\IdCardCheckField;
+use Zlb\SDK\Fields\IdCard\PayWayObjField;
 use Zlb\SDK\Fields\SubmitProfessionalField;
 use Zlb\SDK\ZlbUser;
 
@@ -213,6 +215,40 @@ class ZlbUserTest extends TestCase
     public function testGetUserPayInfo()
     {
         $response = $this->zlbUser->getUserPayInfo($this->auth);
+
+        echo json_encode($response,JSON_UNESCAPED_UNICODE);
+
+        $this->assertArrayHasKey('code', $response);
+
+    }
+
+    public function testIdCardCheck()
+    {
+        // base64后的测试图片
+        $testImg = 'data:image/png;base64,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';
+
+        $idCardCheckField = new IdCardCheckField();
+        $idCardCheckData = [
+            'name' => '张三', // 用户真实姓名 必传
+            'idCard' => '123456789', // 用户真实身份证 必填
+            'cardFrontImg' => $testImg, // 证件正面图片 将图片文件Base64编码；非必填
+            'cardBackImg' => $testImg, // 证件背面图片 将图片文件Base64编码；非必填
+        ];
+
+        // 如果要配置支付方式
+        $payWayFiled = new PayWayObjField();
+        $payWayData = [
+            'payWay' => 1, //支付方式  1：银行卡支付 2：线下支付 3：支付宝支付 4：微信支付
+            'receiveAccount' => '123456', // 收款账号  银行卡支付和支付宝支付必填，银行卡支付填写银行卡账号，支付宝支付填写支付宝账号
+            'bankName' => '中国银行', // 户行名称 银行卡支付必填
+            'bankDepositName' => '测试支行', // 开户支行行名称
+        ];
+        $idCardCheckData['payWayObj'] = $payWayFiled->setPayWayData($payWayData)->getPayWayData();
+
+
+        $idCardCheckField->setIdCardCheckData($idCardCheckData);
+
+        $response = $this->zlbUser->idCardCheck($this->auth, $idCardCheckField);
 
         echo json_encode($response,JSON_UNESCAPED_UNICODE);
 

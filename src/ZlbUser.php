@@ -5,6 +5,7 @@ namespace Zlb\SDK;
 
 
 use Zlb\SDK\Enum\ZlbHttpEnum;
+use Zlb\SDK\Fields\IdCard\IdCardCheckField;
 use Zlb\SDK\Fields\SubmitProfessionalField;
 
 /**
@@ -274,6 +275,21 @@ class ZlbUser extends ZlbBase
         $data = [
             'auth' => $auth,
         ];
+
+        return $this->sendRequest($url, $data, $this->sign);
+    }
+
+    /**
+     * 上传个人信息，个人认证时自动回填；
+     * @param string $auth 个人用户注册后data返回的auth
+     * @param IdCardCheckField $idCardCheckField 上传个人信息 需要的信息
+     * @return array
+     */
+    public function idCardCheck(string $auth, IdCardCheckField $idCardCheckField): array
+    {
+        $url = $this->url . ZlbHttpEnum::AUTH_ID_CARD_CHECK;
+        $data = $idCardCheckField->getIdCardCheckData();
+        $data['auth'] = $auth;
 
         return $this->sendRequest($url, $data, $this->sign);
     }
