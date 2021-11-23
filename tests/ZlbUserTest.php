@@ -154,26 +154,6 @@ class ZlbUserTest extends TestCase
 
     }
 
-    public function testGetPersonRealInfo()
-    {
-        $response = $this->zlbUser->getPersonRealInfo($this->auth);
-
-        echo json_encode($response,JSON_UNESCAPED_UNICODE);
-
-        $this->assertArrayHasKey('code', $response);
-
-    }
-
-    public function testGetUserBankInfo()
-    {
-        $response = $this->zlbUser->getUserBankInfo($this->auth);
-
-        echo json_encode($response,JSON_UNESCAPED_UNICODE);
-
-        $this->assertArrayHasKey('code', $response);
-
-    }
-
     public function testSubmitProfessional()
     {
         // base64后的测试图片
@@ -205,16 +185,6 @@ class ZlbUserTest extends TestCase
         $professionalField->setProfessionalData($professionalData);
 
         $response = $this->zlbUser->submitProfessional($this->auth, $professionalField);
-
-        echo json_encode($response,JSON_UNESCAPED_UNICODE);
-
-        $this->assertArrayHasKey('code', $response);
-
-    }
-
-    public function testGetUserPayInfo()
-    {
-        $response = $this->zlbUser->getUserPayInfo($this->auth);
 
         echo json_encode($response,JSON_UNESCAPED_UNICODE);
 

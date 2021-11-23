@@ -218,37 +218,6 @@ class ZlbUser extends ZlbBase
         return $this->sendRequest($url, $data, $this->sign);
     }
 
-
-    /**
-     * 获取个人用户实名信息
-     * @param string $auth 个人用户注册后data返回的auth
-     * @return array
-     */
-    public function getPersonRealInfo(string $auth): array
-    {
-        $url = $this->url . ZlbHttpEnum::GET_USERINFO;
-        $data = [
-            'auth' => $auth,
-        ];
-
-        return $this->sendRequest($url, $data, $this->sign);
-    }
-
-    /**
-     * 获取个人银行卡信息
-     * @param string $auth 个人用户注册后data返回的auth
-     * @return array
-     */
-    public function getUserBankInfo(string $auth): array
-    {
-        $url = $this->url . ZlbHttpEnum::GET_USER_BANK_INFO;
-        $data = [
-            'auth' => $auth,
-        ];
-
-        return $this->sendRequest($url, $data, $this->sign);
-    }
-
     /**
      * 用户提供认证数据进行认证
      * @param string $auth 个人用户注册后data返回的auth
@@ -260,21 +229,6 @@ class ZlbUser extends ZlbBase
         $url = $this->url . ZlbHttpEnum::SUBMIT_PROFESSIONAL;
         $data = $professionalField->getProfessionalData();
         $data['auth'] = $auth;
-
-        return $this->sendRequest($url, $data, $this->sign);
-    }
-
-    /**
-     * 获取用户默认支付信息
-     * @param string $auth 个人用户注册后data返回的auth
-     * @return array
-     */
-    public function getUserPayInfo(string $auth): array
-    {
-        $url = $this->url . ZlbHttpEnum::GET_USER_PAY_INFO;
-        $data = [
-            'auth' => $auth,
-        ];
 
         return $this->sendRequest($url, $data, $this->sign);
     }

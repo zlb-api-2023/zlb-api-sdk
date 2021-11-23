@@ -84,17 +84,8 @@ class ZlbHttpEnum
     // 注销个人用户
     const DELETE_USER = '/fe/api/deleteUser';
 
-    // 获取个人用户实名信息
-    const GET_USERINFO = '/fe/api/getUserInfo';
-
-    // 获取个人银行卡信息
-    const GET_USER_BANK_INFO = '/fe/api/getUserBankInfo';
-
     // 用户提供认证数据进行认证
     const SUBMIT_PROFESSIONAL = '/fe/api/auth/professional';
-
-    // 获取用户默认支付信息
-    const GET_USER_PAY_INFO = '/fe/api/getUserPayInfo';
 
     // 上传个人信息，个人认证时自动回填；
     const AUTH_ID_CARD_CHECK = '/fe/api/auth/idCardCheck';
