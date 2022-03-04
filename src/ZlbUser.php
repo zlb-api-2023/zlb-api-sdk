@@ -46,6 +46,21 @@ class ZlbUser extends ZlbBase
     }
 
     /**
+     * 获取个人信息（姓名及收款方式）
+     * @param  string  $auth
+     * @return array
+     */
+    public function getPersonInfo(string $auth): array
+    {
+        $url = $this->url . ZlbHttpEnum::GET_PERSON_INFO;
+        $data = [
+            'auth' => $auth,
+        ];
+
+        return $this->sendRequest($url, $data, $this->sign);
+    }
+
+    /**
      * 获取个人用户的auth
      * @param string $mobile
      * @param string $password
@@ -64,16 +79,18 @@ class ZlbUser extends ZlbBase
 
     /**
      * 个人用户实名认证地址获取
-     * @param string $auth 个人用户注册后data返回的auth
-     * @param string $returnUrl 实名认证成功后 回调的地址
+     * @param  string  $auth  个人用户注册后data返回的auth
+     * @param  string  $returnUrl  实名认证成功后 回调的地址
+     * @param  string  $callbackUrl 回调地址
      * @return array
      */
-    public function getPersonalAuthUrl(string $auth, string $returnUrl): array
+    public function getPersonalAuthUrl(string $auth, string $returnUrl, string $callbackUrl = ''): array
     {
         $url = $this->url . ZlbHttpEnum::GET_PERSONAL_AUTH;
         $data = [
             'auth' => $auth,
             'returnUrl' => $returnUrl,
+            'callbackUrl' => $callbackUrl,
         ];
 
         return $this->sendRequest($url, $data, $this->sign);
@@ -81,16 +98,18 @@ class ZlbUser extends ZlbBase
 
     /**
      * 个人用户实名认证地址获取（页面）
-     * @param string $auth 个人用户注册后data返回的auth
-     * @param string $returnUrl 实名认证成功后 回调的地址
+     * @param  string  $auth  个人用户注册后data返回的auth
+     * @param  string  $returnUrl  实名认证成功后 回调的地址
+     * @param  string  $callbackUrl
      * @return array
      */
-    public function getPersonalAuthH5Url(string $auth, string $returnUrl): array
+    public function getPersonalAuthH5Url(string $auth, string $returnUrl, string $callbackUrl = ''): array
     {
         $url = $this->url . ZlbHttpEnum::GET_PERSONAL_AUTH_URL;
         $data = [
             'auth' => $auth,
             'returnUrl' => urlencode($returnUrl),
+            'callbackUrl' => urlencode($callbackUrl),
         ];
 
         return $this->sendRequest($url, $data, $this->sign);
@@ -164,6 +183,23 @@ class ZlbUser extends ZlbBase
         $data = [
             'auth' => $auth,
             'returnUrl' => $returnUrl,
+        ];
+
+        return $this->sendRequest($url, $data, $this->sign);
+    }
+
+    /**
+     * 微信小程序实名认证
+     * @param string $auth 个人用户注册后data返回的auth
+     * @param string $callbackUrl 个人认证结果回调地址URL
+     * @return array
+     */
+    public function getWxAuthUrl(string $auth, string $callbackUrl): array
+    {
+        $url = $this->url . ZlbHttpEnum::WX_GET_TOKEN_BY_AUTH;
+        $data = [
+            'auth' => $auth,
+            'callbackUrl' => $callbackUrl,
         ];
 
         return $this->sendRequest($url, $data, $this->sign);

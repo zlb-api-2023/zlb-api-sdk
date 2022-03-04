@@ -30,6 +30,7 @@ class ZlbUserTest extends TestCase
     protected $zlbPassword = '';
     protected $auth = 'f141a4635bc24185';
     protected $returnUrl = 'https://baidu.com';
+    protected $callbackUrl = 'https://baidu.com';
 
     protected function setUp(): void
     {
@@ -42,7 +43,7 @@ class ZlbUserTest extends TestCase
     {
         $response = $this->zlbUser->register($this->zlbMobile, $this->zlbPassword);
 
-        echo json_encode($response,JSON_UNESCAPED_UNICODE);
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
         $this->assertArrayHasKey('code', $response);
 
@@ -52,7 +53,7 @@ class ZlbUserTest extends TestCase
     {
         $response = $this->zlbUser->getPersonalUserAuth($this->zlbMobile, $this->zlbPassword);
 
-        echo json_encode($response,JSON_UNESCAPED_UNICODE);
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
         $this->assertArrayHasKey('code', $response);
         $this->assertEquals(10000, $response['code']);
@@ -62,9 +63,31 @@ class ZlbUserTest extends TestCase
 
     public function testGetPersonalAuthUrl()
     {
-        $response = $this->zlbUser->getPersonalAuthUrl($this->auth, $this->returnUrl);
+        $response = $this->zlbUser->getPersonalAuthUrl($this->auth, $this->returnUrl, $this->callbackUrl);
 
-        echo json_encode($response,JSON_UNESCAPED_UNICODE);
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
+
+        $this->assertArrayHasKey('code', $response);
+        $this->assertEquals(10000, $response['code']);
+
+    }
+
+    public function testGetWxAuthUrl()
+    {
+        $response = $this->zlbUser->getWxAuthUrl($this->auth, $this->callbackUrl);
+
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
+
+        $this->assertArrayHasKey('code', $response);
+        $this->assertEquals(10000, $response['code']);
+
+    }
+
+    public function testGetPersonInfo()
+    {
+        $response = $this->zlbUser->getPersonInfo($this->auth);
+
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
         $this->assertArrayHasKey('code', $response);
         $this->assertEquals(10000, $response['code']);
@@ -73,10 +96,10 @@ class ZlbUserTest extends TestCase
 
     public function testGetPersonalAuthH5Url()
     {
-        $response = $this->zlbUser->getPersonalAuthH5Url($this->auth, $this->returnUrl);
+        $response = $this->zlbUser->getPersonalAuthH5Url($this->auth, $this->returnUrl, $this->callbackUrl);
 
-        echo $response['data'] . PHP_EOL;
-        echo json_encode($response,JSON_UNESCAPED_UNICODE);
+        echo $response['data'].PHP_EOL;
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
         $this->assertArrayHasKey('code', $response);
         $this->assertEquals(10000, $response['code']);
@@ -87,7 +110,7 @@ class ZlbUserTest extends TestCase
     {
         $response = $this->zlbUser->getPersonalAuthState($this->auth);
 
-        echo json_encode($response,JSON_UNESCAPED_UNICODE);
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
         $this->assertArrayHasKey('code', $response);
         $this->assertEquals(10000, $response['code']);
@@ -107,7 +130,7 @@ class ZlbUserTest extends TestCase
             '程序员'
         );
 
-        echo json_encode($response,JSON_UNESCAPED_UNICODE);
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
         $this->assertArrayHasKey('code', $response);
 
@@ -117,7 +140,7 @@ class ZlbUserTest extends TestCase
     {
         $response = $this->zlbUser->getProtocolUrl($this->auth, $this->returnUrl);
 
-        echo json_encode($response,JSON_UNESCAPED_UNICODE);
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
         $this->assertArrayHasKey('code', $response);
 
@@ -127,7 +150,7 @@ class ZlbUserTest extends TestCase
     {
         $response = $this->zlbUser->getUserProgress($this->auth);
 
-        echo json_encode($response,JSON_UNESCAPED_UNICODE);
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
         $this->assertArrayHasKey('code', $response);
         $this->assertEquals(10000, $response['code']);
@@ -136,9 +159,9 @@ class ZlbUserTest extends TestCase
 
     public function testPersonalChangeMobile()
     {
-        $response = $this->zlbUser->personalChangeMobile('123456','123456123');
+        $response = $this->zlbUser->personalChangeMobile('123456', '123456123');
 
-        echo json_encode($response,JSON_UNESCAPED_UNICODE);
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
         $this->assertArrayHasKey('code', $response);
 
@@ -148,7 +171,7 @@ class ZlbUserTest extends TestCase
     {
         $response = $this->zlbUser->deletePerson('123456');
 
-        echo json_encode($response,JSON_UNESCAPED_UNICODE);
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
         $this->assertArrayHasKey('code', $response);
 
@@ -165,28 +188,29 @@ class ZlbUserTest extends TestCase
 
         $professionalField = new SubmitProfessionalField();
         $professionalData = [
-            'address' => '重庆', // 居住详细地址 非必传
-            'alipayAccount' => '5244987897', // 支付宝账户-支付宝支付必填
-            'bankAccount' => '123456', // 开户银行账号-银行卡支付时必填
+            'address'         => '重庆', // 居住详细地址 非必传
+            'alipayAccount'   => '5244987897', // 支付宝账户-支付宝支付必填
+            'bankAccount'     => '123456', // 开户银行账号-银行卡支付时必填
             'bankDepositName' => '江北支行', // 开户支行名称 非必传
-            'bankImage' => $testImg,// 将图片文件Base64编码 支付方式选择银行卡也可以不传
-            'bankName' => '中国工商银行', // 银行卡\支付宝\微信支付必须要选择一种 银行卡支付必填
-            'cardFrontImg' => $testImg, // 证件正面图片 将图片文件Base64编码；前期接入时确定是否必填
-            'cardBackImg' => $testImg, // 证件背面图片 将图片文件Base64编码；前期接入时确定是否必填
-            'cardNumber' => '555666777888', // 用户证件号
-            'cardType' => 1, // 证件类型 1、身份证 2、护照
-            'contractFile' => $testContractFile, // 协议文件 将文件Base64编码(要加前缀)，需是pdf文件
-            'expiresDate' => '2020-06-17', // 证件到期时间
-            'payWay' => 1, // 默认支付方式  1.银企互联 2.线下支付 3.支付宝 4.微信支付  非必传
-            'realName' => '张三', // 用户真实姓名 必传
-            'sex' => 1,// 性别 1、男 2、女 3、未知 非必传
-            'validationImg' => $testImg, // 活体采集图片 将图片文件Base64编码；前期接入时确定是否必填
+            'bankImage'       => $testImg,// 将图片文件Base64编码 支付方式选择银行卡也可以不传
+            'bankName'        => '中国工商银行', // 银行卡\支付宝\微信支付必须要选择一种 银行卡支付必填
+            'cardFrontImg'    => $testImg, // 证件正面图片 将图片文件Base64编码；前期接入时确定是否必填
+            'cardBackImg'     => $testImg, // 证件背面图片 将图片文件Base64编码；前期接入时确定是否必填
+            'cardNumber'      => '555666777888', // 用户证件号
+            'cardType'        => 1, // 证件类型 1、身份证 2、护照
+            'contractFile'    => $testContractFile, // 协议文件 将文件Base64编码(要加前缀)，需是pdf文件
+            'expiresDate'     => '2020-06-17', // 证件到期时间
+            'payWay'          => 1, // 默认支付方式  1.银企互联 2.线下支付 3.支付宝 4.微信支付  非必传
+            'realName'        => '张三', // 用户真实姓名 必传
+            'sex'             => 1,// 性别 1、男 2、女 3、未知 非必传
+            'validationImg'   => $testImg, // 活体采集图片 将图片文件Base64编码；前期接入时确定是否必填
+            'callbackUrl'     => $this->callbackUrl, // 个人认证结果回调地址URL
         ];
         $professionalField->setProfessionalData($professionalData);
 
         $response = $this->zlbUser->submitProfessional($this->auth, $professionalField);
 
-        echo json_encode($response,JSON_UNESCAPED_UNICODE);
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
         $this->assertArrayHasKey('code', $response);
 
@@ -199,18 +223,18 @@ class ZlbUserTest extends TestCase
 
         $idCardCheckField = new IdCardCheckField();
         $idCardCheckData = [
-            'name' => '张三', // 用户真实姓名 必传
-            'idCard' => '123456789', // 用户真实身份证 必填
+            'name'         => '张三', // 用户真实姓名 必传
+            'idCard'       => '123456789', // 用户真实身份证 必填
             'cardFrontImg' => $testImg, // 证件正面图片 将图片文件Base64编码；非必填
-            'cardBackImg' => $testImg, // 证件背面图片 将图片文件Base64编码；非必填
+            'cardBackImg'  => $testImg, // 证件背面图片 将图片文件Base64编码；非必填
         ];
 
         // 如果要配置支付方式
         $payWayFiled = new PayWayObjField();
         $payWayData = [
-            'payWay' => 1, //支付方式  1：银行卡支付 2：线下支付 3：支付宝支付 4：微信支付
-            'receiveAccount' => '123456', // 收款账号  银行卡支付和支付宝支付必填，银行卡支付填写银行卡账号，支付宝支付填写支付宝账号
-            'bankName' => '中国银行', // 户行名称 银行卡支付必填
+            'payWay'          => 1, //支付方式  1：银行卡支付 2：线下支付 3：支付宝支付 4：微信支付
+            'receiveAccount'  => '123456', // 收款账号  银行卡支付和支付宝支付必填，银行卡支付填写银行卡账号，支付宝支付填写支付宝账号
+            'bankName'        => '中国银行', // 户行名称 银行卡支付必填
             'bankDepositName' => '测试支行', // 开户支行行名称
         ];
         $idCardCheckData['payWayObj'] = $payWayFiled->setPayWayData($payWayData)->getPayWayData();
@@ -220,7 +244,7 @@ class ZlbUserTest extends TestCase
 
         $response = $this->zlbUser->idCardCheck($this->auth, $idCardCheckField);
 
-        echo json_encode($response,JSON_UNESCAPED_UNICODE);
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
         $this->assertArrayHasKey('code', $response);
 

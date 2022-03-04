@@ -90,4 +90,10 @@ class ZlbHttpEnum
     // 上传个人信息，个人认证时自动回填；
     const AUTH_ID_CARD_CHECK = '/fe/api/auth/idCardCheck';
 
+    // 微信小程序实名认证
+    const WX_GET_TOKEN_BY_AUTH = '/fe/api/professional/getTokenByAuth';
+
+    // 获取用户信息
+    const GET_PERSON_INFO = '/fe/api/auth/getPersonInfo';
+
 }

@@ -115,6 +115,12 @@ class SubmitProfessionalField
     protected $validationImg;
 
     /**
+     * 个人认证结果回调地址URL 非必传
+     * @var string
+     */
+    protected $callbackUrl;
+
+    /**
      * @return string
      */
     public function getAddress(): string
@@ -436,6 +442,7 @@ class SubmitProfessionalField
             'realName' => $this->realName,
             'sex' => $this->sex,
             'validationImg' => $this->validationImg,
+            'callbackUrl' => $this->callbackUrl,
         ];
     }
 }
