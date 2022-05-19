@@ -30,7 +30,7 @@ trait HttpClient
                 if (!empty($resultArr['data'])){
                     $decryptData = $this->decrypt($resultArr['data']);
                     $returnData = json_decode($this->decrypt($resultArr['data']), true);
-                    if (null === $returnData){
+                    if (!is_array($returnData)){
                         $returnData = $decryptData;
                     }
                 }
