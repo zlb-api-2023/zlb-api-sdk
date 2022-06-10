@@ -68,30 +68,11 @@ class ZlbFastTaskTest extends TestCase
             'requirement' => '不限',
             'taskAddress' => '不限',
             'deliveryRequirement' => '不限',
-            'bounty' => 2021,// 单位分
+            'isAutoInvoice' => false, // 任务完成自动开票（True:自动开票（默认）False：不自动开票）
+            'bounty' => 1122,// 单位分
         ];
 
-        $invoiceObj = [
-            'type' => 1,// 1：专票；2：普票
-            'companyName' => '测试抬头',// 非必传
-            'companyCode' => '测试纳税人识别号',// 非必传
-            'comAddress' => '测试公司详细地址',
-            'comTelPhone' => '测试公司联系电话',
-            'comBankName' => '测试公司开户行',
-            'comBankCard' => '测试公司银行账号',
-            'telPhone' => '测试联系人手机号',
-            'realName' => '测试联系人',
-            'invoiceCate' => '经纪代理服务',
-            'invoiceContent' => '其他经纪代理服务',
-            'province' => '四川省',
-            'city' => '成都市',
-            'area' => '锦江区',
-            'invoiceAddress' => '测试具体收件地址',
-            'isAutoInvoice' => false,
-            'invoiceSendType' => 1,// 1立即寄出 2按周寄出 3月底寄出 4月初寄出
-            'note' => '',
-        ];
-        $this->zlbFastTask->setInviteUserList($oldTaskInviteUserList)->setInvoiceObj($invoiceObj)->setTaskObj($taskObj);
+        $this->zlbFastTask->setInviteUserList($oldTaskInviteUserList)->setTaskObj($taskObj);
 
         $response = $this->zlbFastTask->publishFastTask();
 

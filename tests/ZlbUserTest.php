@@ -14,6 +14,7 @@ namespace Zlb\Tests;
 use PHPUnit\Framework\TestCase;
 use Zlb\SDK\Fields\IdCard\IdCardCheckField;
 use Zlb\SDK\Fields\IdCard\PayWayObjField;
+use Zlb\SDK\Fields\SaveInvoiceInfoField;
 use Zlb\SDK\Fields\SubmitProfessionalField;
 use Zlb\SDK\ZlbUser;
 
@@ -58,17 +59,6 @@ class ZlbUserTest extends TestCase
         $this->assertArrayHasKey('code', $response);
         $this->assertEquals(10000, $response['code']);
         $this->assertEquals($this->auth, $response['data']);
-
-    }
-
-    public function testGetPersonalAuthUrl()
-    {
-        $response = $this->zlbUser->getPersonalAuthUrl($this->auth, $this->returnUrl, $this->callbackUrl);
-
-        echo json_encode($response, JSON_UNESCAPED_UNICODE);
-
-        $this->assertArrayHasKey('code', $response);
-        $this->assertEquals(10000, $response['code']);
 
     }
 
@@ -129,16 +119,6 @@ class ZlbUserTest extends TestCase
             52,
             '程序员'
         );
-
-        echo json_encode($response, JSON_UNESCAPED_UNICODE);
-
-        $this->assertArrayHasKey('code', $response);
-
-    }
-
-    public function testGetProtocolUrl()
-    {
-        $response = $this->zlbUser->getProtocolUrl($this->auth, $this->returnUrl);
 
         echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
@@ -248,5 +228,42 @@ class ZlbUserTest extends TestCase
 
         $this->assertArrayHasKey('code', $response);
 
+    }
+
+    public function testSaveInvoiceInfo()
+    {
+        $invoiceField = new SaveInvoiceInfoField();
+        $invoiceData = [
+            'type'            => 1,// 发票类型(1增值税专票 2增值税普票，注意：需同贵公司财务确认) 必填
+            'invoiceCate'     => '类目1',// 发票大类/类目1 必填
+            'invoiceContent'  => '类目2',// 发票内容/类目2 必填
+            'comAddress'      => '四川省成都市天府大道北段1700',// 发票购方公司地址 type为1必填
+            'comTelphone'     => '15888888888',// 发票购方公司电话 type为1必填
+            'comBankName'     => '中国银行北京支行',// 发票购方公司开户行 type为1必填
+            'comBankCard'     => '12785541324',// 发票购方公司银行账号 type为1必填
+            'comEmailAddress' => 'xxxx@xxx.com',// 电子邮箱 必填
+            'province'        => '四川省',// 省名称 必填
+            'city'            => '成都市',// 城市名称/市名称 必填
+            'area'            => '高新区',// 区名称 非必填
+            'address'         => 'xxxx路',// 收件具体地址 必填
+            'realName'        => '张三',// 收件人姓名 必填
+            'telPhone'        => '1588xxxx8888',// 收件人电话 必填
+            'invoiceSendType' => '3',// 寄出时间 1-立即寄出 2-按周寄出 3-月底寄出 没填默认3  非必填
+        ];
+        $invoiceField->setInvoiceInfo($invoiceData);
+        $response = $this->zlbUser->saveInvoiceInfo($invoiceField);
+
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
+
+        $this->assertArrayHasKey('code', $response);
+    }
+
+    public function testGetAccountBalance()
+    {
+        $response = $this->zlbUser->getAccountBalance();
+
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
+
+        $this->assertArrayHasKey('code', $response);
     }
 }

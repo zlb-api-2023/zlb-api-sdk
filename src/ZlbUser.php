@@ -4,8 +4,9 @@
 namespace Zlb\SDK;
 
 
-use Zlb\SDK\Enum\ZlbHttpEnum;
+use Zlb\SDK\Enum\v2\ZlbHttpEnum;
 use Zlb\SDK\Fields\IdCard\IdCardCheckField;
+use Zlb\SDK\Fields\SaveInvoiceInfoField;
 use Zlb\SDK\Fields\SubmitProfessionalField;
 
 /**
@@ -72,25 +73,6 @@ class ZlbUser extends ZlbBase
         $data = [
             'mobile' => $mobile,
             'password' => $password,
-        ];
-
-        return $this->sendRequest($url, $data, $this->sign);
-    }
-
-    /**
-     * 个人用户实名认证地址获取
-     * @param  string  $auth  个人用户注册后data返回的auth
-     * @param  string  $returnUrl  实名认证成功后 回调的地址
-     * @param  string  $callbackUrl 回调地址
-     * @return array
-     */
-    public function getPersonalAuthUrl(string $auth, string $returnUrl, string $callbackUrl = ''): array
-    {
-        $url = $this->url . ZlbHttpEnum::GET_PERSONAL_AUTH;
-        $data = [
-            'auth' => $auth,
-            'returnUrl' => $returnUrl,
-            'callbackUrl' => $callbackUrl,
         ];
 
         return $this->sendRequest($url, $data, $this->sign);
@@ -166,23 +148,6 @@ class ZlbUser extends ZlbBase
             'address' => $address,
             'cateId' => $cateId,
             'fullTimeWork' => $fullTimeWork,
-        ];
-
-        return $this->sendRequest($url, $data, $this->sign);
-    }
-
-    /**
-     * 获取签订协议地址
-     * @param string $auth 个人用户注册后data返回的auth
-     * @param string $returnUrl 实名认证成功后 回调的地址
-     * @return array
-     */
-    public function getProtocolUrl(string $auth, string $returnUrl): array
-    {
-        $url = $this->url . ZlbHttpEnum::GET_QUERY_SIGNATURE;
-        $data = [
-            'auth' => $auth,
-            'returnUrl' => $returnUrl,
         ];
 
         return $this->sendRequest($url, $data, $this->sign);
@@ -282,5 +247,29 @@ class ZlbUser extends ZlbBase
         $data['auth'] = $auth;
 
         return $this->sendRequest($url, $data, $this->sign);
+    }
+
+    /**
+     * 编辑企业开票信息
+     * @param  SaveInvoiceInfoField  $field
+     * @return array
+     */
+    public function saveInvoiceInfo(SaveInvoiceInfoField $field): array
+    {
+        $url = $this->url . ZlbHttpEnum::SAVE_INVOICE_INFO;
+        $data = $field->getInvoiceInfoData();
+
+        return $this->sendRequest($url, $data, $this->sign);
+    }
+
+    /**
+     * 企业账户余额查询
+     * @return array
+     */
+    public function getAccountBalance(): array
+    {
+        $url = $this->url . ZlbHttpEnum::GET_ACCOUNT_BALANCE;
+
+        return $this->sendRequest($url, [], $this->sign);
     }
 }

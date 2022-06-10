@@ -4,7 +4,7 @@
 namespace Zlb\SDK;
 
 
-use Zlb\SDK\Enum\ZlbHttpEnum;
+use Zlb\SDK\Enum\v2\ZlbHttpEnum;
 use Zlb\SDK\Fields\FastTaskInviteUserListField;
 use Zlb\SDK\Fields\FastTaskInvoiceObjField;
 use Zlb\SDK\Fields\FastTaskTaskObjField;
@@ -18,7 +18,6 @@ class ZlbFastTask extends ZlbBase
 {
 
     use FastTaskTaskObjField;
-    use FastTaskInvoiceObjField;
     use FastTaskInviteUserListField;
 
     /**
@@ -42,7 +41,6 @@ class ZlbFastTask extends ZlbBase
         $url = $this->url . ZlbHttpEnum::PUBLISH_FAST_TASK;
         $data = [
             'taskObj' => $this->getTaskObj(),
-            'invoiceObj' => $this->getInvoiceObj(),
             'oldTaskInviteUserList' => $this->getInviteUserList(),
         ];
 

@@ -61,6 +61,11 @@ trait FastTaskTaskObjField
     protected $bounty;
 
     /**
+     * @var bool 任务完成自动开票（True:自动开票（默认）False：不自动开票）
+     */
+    protected $isAutoInvoice = true;
+
+    /**
      * @return int
      */
     public function getBounty(): int
@@ -223,6 +228,25 @@ trait FastTaskTaskObjField
     }
 
     /**
+     * @return bool
+     */
+    public function isAutoInvoice(): bool
+    {
+        return $this->isAutoInvoice;
+    }
+
+    /**
+     * @param  bool  $isAutoInvoice
+     * @return FastTaskTaskObjField
+     */
+    public function setIsAutoInvoice(bool $isAutoInvoice): FastTaskTaskObjField
+    {
+        $this->isAutoInvoice = $isAutoInvoice;
+        return $this;
+    }
+
+
+    /**
      * @param array $taskObj
      * @return FastTaskTaskObjField
      */
@@ -249,6 +273,7 @@ trait FastTaskTaskObjField
             'address' => $this->taskAddress,
             'deliveryRequirement' => $this->deliveryRequirement,
             'bounty' => $this->bounty,
+            'isAutoInvoice' => $this->isAutoInvoice,
         ];
     }
 }
