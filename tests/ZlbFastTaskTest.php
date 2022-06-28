@@ -54,6 +54,7 @@ class ZlbFastTaskTest extends TestCase
                 'attachmentIds' => [
                     "1342715461476814850"
                 ],
+                'attachmentUrl' => 'https://baidu.com',// 附件地址 非必填
                 'appid' => '',// 微信收款账户appid
                 'openid' => '',// 微信收款账户openid
                 'idCard' => '',// 身份证号码

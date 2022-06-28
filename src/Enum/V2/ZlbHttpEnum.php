@@ -55,7 +55,7 @@ class ZlbHttpEnum
     const WX_GET_TOKEN_BY_AUTH = '/fe/api/professional/getTokenByAuth';
 
     // 获取用户信息
-    const GET_PERSON_INFO = '/fe/api/auth/getPersonInfo';
+    const GET_PERSON_INFO = '/fe/api/auth/v1/getPersonInfo';
 
     // 编辑企业开票信息
     const SAVE_INVOICE_INFO = '/invoice/api/companyInvoice/saveInvoiceInfo';
