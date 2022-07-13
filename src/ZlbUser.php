@@ -272,4 +272,33 @@ class ZlbUser extends ZlbBase
 
         return $this->sendRequest($url, [], $this->sign);
     }
+
+    /**
+     * 修改个人收款方式
+     * @param  string  $auth
+     * @param  int  $payWay
+     * @param  string|null  $receiveAccount
+     * @param  string|null  $bankName
+     * @param  string|null  $bankDepositName
+     * @return array
+     */
+    public function modifyPayWayAndAccount(
+        string $auth,
+        int $payWay,
+        ?string $receiveAccount = null,
+        ?string $bankName = null,
+        ?string $bankDepositName = null
+    ): array
+    {
+        $url = $this->url . ZlbHttpEnum::MODIFY_PAY_WAY_AND_ACCOUNT;
+        $data = [
+            'auth' => $auth,
+            'payWay' => $payWay,
+            'receiveAccount' => $receiveAccount,
+            'bankName' => $bankName,
+            'bankDepositName' => $bankDepositName,
+        ];
+
+        return $this->sendRequest($url, $data, $this->sign);
+    }
 }

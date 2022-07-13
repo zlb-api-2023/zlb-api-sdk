@@ -266,4 +266,23 @@ class ZlbUserTest extends TestCase
 
         $this->assertArrayHasKey('code', $response);
     }
+
+    public function testModifyPayWayAndAccount()
+    {
+        $payWay = 1;// 支付方式(1：银行卡支付 2：线下支付 3：支付宝支付 4：微信支付)
+        $receiveAccount = '123456';// 收款账号  银行卡支付和支付宝支付必填，银行卡支付填写银行卡账号，支付宝支付填写支付宝账号
+        $bankName = '平安银行';// 开户行名称  银行卡支付必填
+        $bankDepositName = '平安银行重庆支行';// 开户支行行名称
+        $response = $this->zlbUser->modifyPayWayAndAccount(
+            $this->auth,
+            $payWay,
+            $receiveAccount,
+            $bankName,
+            $bankDepositName
+        );
+
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
+
+        $this->assertArrayHasKey('code', $response);
+    }
 }

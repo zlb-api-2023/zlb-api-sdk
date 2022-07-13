@@ -63,4 +63,7 @@ class ZlbHttpEnum
     // 企业账户余额查询
     const GET_ACCOUNT_BALANCE = '/fe/api/company/getAccountBalance';
 
+    // 修改个人收款方式
+    const MODIFY_PAY_WAY_AND_ACCOUNT  = '/fe/api/auth/modifyPayWayAndAccount';
+
 }
