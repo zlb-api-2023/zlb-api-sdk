@@ -205,6 +205,7 @@ class ZlbUserTest extends TestCase
         $idCardCheckData = [
             'name'         => '张三', // 用户真实姓名 必传
             'idCard'       => '123456789', // 用户真实身份证 必填
+            'preMobile'    => '123456789', // 银行卡预留手机号,若需要进行银行卡四要素认证，则需要输入办理银行卡号对应的预留手机号 非必填
             'cardFrontImg' => $testImg, // 证件正面图片 将图片文件Base64编码；非必填
             'cardBackImg'  => $testImg, // 证件背面图片 将图片文件Base64编码；非必填
         ];

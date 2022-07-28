@@ -49,6 +49,12 @@ class IdCardCheckField
     protected $payWayObj;
 
     /**
+     * 银行卡预留手机号,若需要进行银行卡四要素认证，则需要输入办理银行卡号对应的预留手机号
+     * @var string
+     */
+    protected $preMobile;
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -151,6 +157,26 @@ class IdCardCheckField
     }
 
     /**
+     * @return string
+     */
+    public function getPreMobile(): string
+    {
+        return $this->preMobile;
+    }
+
+    /**
+     * @param string $preMobile
+     * @return IdCardCheckField
+     */
+    public function setPreMobile(string $preMobile): IdCardCheckField
+    {
+        $this->preMobile = $preMobile;
+        return $this;
+    }
+
+
+
+    /**
      * @return array
      */
     public function getIdCardCheckData(): array
@@ -160,6 +186,7 @@ class IdCardCheckField
             'idCard' => $this->idCard,
             'cardFrontImg' => $this->cardFrontImg,
             'cardBackImg' => $this->cardBackImg,
+            'preMobile' => $this->preMobile,
             'payWayObj' => $this->payWayObj,
         ];
     }
