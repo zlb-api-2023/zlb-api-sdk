@@ -4,7 +4,7 @@
 namespace Zlb\SDK;
 
 
-use Zlb\SDK\Enum\v2\ZlbHttpEnum;
+use Zlb\SDK\Enum\V2\ZlbHttpEnum;
 use Zlb\SDK\Fields\IdCard\IdCardCheckField;
 use Zlb\SDK\Fields\SaveInvoiceInfoField;
 use Zlb\SDK\Fields\SubmitProfessionalField;

@@ -12,7 +12,7 @@
 namespace Zlb\SDK;
 
 
-use Zlb\SDK\Enum\v2\ZlbHttpEnum;
+use Zlb\SDK\Enum\V2\ZlbHttpEnum;
 
 /**
  * ZLB常用字典
