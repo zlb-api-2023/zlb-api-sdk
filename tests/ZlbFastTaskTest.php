@@ -24,6 +24,7 @@ class ZlbFastTaskTest extends TestCase
 
     protected $zlbFastTask;
     protected $taskId = '1366996989550333954';
+    protected $auth = '123456789';
 
     protected function setUp(): void
     {
@@ -86,5 +87,15 @@ class ZlbFastTaskTest extends TestCase
 
     }
 
+    public function testGetPaymentDocument()
+    {
+        $response = $this->zlbFastTask->getPaymentDocument($this->auth, $this->taskId);
 
+        echo json_encode($response,JSON_UNESCAPED_UNICODE);
+
+        $this->assertArrayHasKey('code', $response);
+        $this->assertEquals(10000, $response['code']);
+        $this->assertArrayHasKey('data', $response);
+        $this->assertArrayHasKey('taskId', $response['data']);
+    }
 }

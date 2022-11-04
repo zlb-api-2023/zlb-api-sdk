@@ -61,4 +61,21 @@ class ZlbFastTask extends ZlbBase
 
         return $this->sendRequest($url, $data, $this->sign);
     }
+
+    /**
+     * 下载支付凭证
+     * @param  string  $auth
+     * @param  int  $taskId  任务ID
+     * @return array
+     */
+    public function getPaymentDocument(string $auth,int $taskId): array
+    {
+        $url = $this->url . ZlbHttpEnum::GET_PAYMENT_DOCUMENT;
+        $data = [
+            'auth' => $auth,
+            'taskId' => $taskId,
+        ];
+
+        return $this->sendRequest($url, $data, $this->sign);
+    }
 }

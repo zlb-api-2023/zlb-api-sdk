@@ -36,6 +36,9 @@ class ZlbHttpEnum
     // 查询极速任务情况
     const GET_FAST_TASK_INFO = '/task/api/oldTaskInfo';
 
+    // 下载支付凭证
+    const GET_PAYMENT_DOCUMENT = '/task/api/pay/getPaymentDocument';
+
     // 查询用户注册认证及协议进度信息
     const GET_USER_PROGRESS = '/fe/api/getUserProgress';
 
