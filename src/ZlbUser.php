@@ -205,7 +205,7 @@ class ZlbUser extends ZlbBase
 
 
     /**
-     * 注销个人用户
+     * 解绑个人用户
      * @param string $auth 个人用户注册后data返回的auth
      * @return array
      */
@@ -297,6 +297,38 @@ class ZlbUser extends ZlbBase
             'receiveAccount' => $receiveAccount,
             'bankName' => $bankName,
             'bankDepositName' => $bankDepositName,
+        ];
+
+        return $this->sendRequest($url, $data, $this->sign);
+    }
+
+    /**
+     * 发送注销验证码
+     * @param string $auth 个人用户注册后data返回的auth
+     * @return array
+     */
+    public function sendCancellationVerifyCode(string $auth): array
+    {
+        $url = $this->url . ZlbHttpEnum::SEND_CANCELLATION_VERIFY_CODE;
+        $data = [
+            'auth' => $auth,
+        ];
+
+        return $this->sendRequest($url, $data, $this->sign);
+    }
+
+    /**
+     * 注销账户
+     * @param string $auth 个人用户注册后data返回的auth
+     * @param string $code 短信验证码
+     * @return array
+     */
+    public function cancellationAccount(string $auth, string $code): array
+    {
+        $url = $this->url . ZlbHttpEnum::CANCELLATION_ACCOUNT;
+        $data = [
+            'auth' => $auth,
+            'code' => $code,
         ];
 
         return $this->sendRequest($url, $data, $this->sign);

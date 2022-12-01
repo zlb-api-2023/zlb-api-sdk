@@ -45,7 +45,7 @@ class ZlbHttpEnum
     // 换绑个人用户的手机
     const CHANGE_MOBILE = '/fe/api/changeMobile';
 
-    // 注销个人用户
+    // 解绑个人用户
     const DELETE_USER = '/fe/api/deleteUser';
 
     // 用户提供认证数据进行认证
@@ -68,5 +68,11 @@ class ZlbHttpEnum
 
     // 修改个人收款方式
     const MODIFY_PAY_WAY_AND_ACCOUNT  = '/fe/api/auth/modifyPayWayAndAccount';
+
+    // 发送注销验证码
+    const SEND_CANCELLATION_VERIFY_CODE  = '/fe/api/sendCancellationVerifyCode';
+
+    // 注销帐号
+    const CANCELLATION_ACCOUNT  = '/fe/api/cancellationAccount';
 
 }

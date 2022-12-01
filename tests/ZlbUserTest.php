@@ -286,4 +286,25 @@ class ZlbUserTest extends TestCase
 
         $this->assertArrayHasKey('code', $response);
     }
+
+    public function testSendCancellationVerifyCode()
+    {
+        $response = $this->zlbUser->sendCancellationVerifyCode($this->auth);
+
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
+
+        $this->assertArrayHasKey('code', $response);
+
+    }
+
+    public function testCancellationAccount()
+    {
+        $code = '999999';
+        $response = $this->zlbUser->cancellationAccount($this->auth, $code);
+
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
+
+        $this->assertArrayHasKey('code', $response);
+
+    }
 }
