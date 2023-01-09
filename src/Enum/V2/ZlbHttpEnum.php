@@ -75,4 +75,10 @@ class ZlbHttpEnum
     // 注销帐号
     const CANCELLATION_ACCOUNT  = '/fe/api/cancellationAccount';
 
+    // 纯接口认证 认证信息校验
+    const SUBMIT_USER_VERIFY_INFO  = '/user-center/api/verify/submitUserVerifyInfo';
+
+    // 纯接口认证 验证码校验
+    const SUBMIT_USER_VERIFY_CODE  = '/user-center/api/verify/submitUserVerifyCode';
+
 }

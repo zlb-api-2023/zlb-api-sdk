@@ -8,6 +8,7 @@ use Zlb\SDK\Enum\V2\ZlbHttpEnum;
 use Zlb\SDK\Fields\IdCard\IdCardCheckField;
 use Zlb\SDK\Fields\SaveInvoiceInfoField;
 use Zlb\SDK\Fields\SubmitProfessionalField;
+use Zlb\SDK\Fields\SubmitUserVerifyInfoField;
 
 /**
  * 用户相关
@@ -329,6 +330,38 @@ class ZlbUser extends ZlbBase
         $data = [
             'auth' => $auth,
             'code' => $code,
+        ];
+
+        return $this->sendRequest($url, $data, $this->sign);
+    }
+
+    /**
+     * 纯接口认证 认证信息校验
+     * @param  string  $auth  个人用户注册后data返回的auth
+     * @param  SubmitUserVerifyInfoField  $userVerifyInfoField 认证信息校验 所需的字段
+     * @return array
+     */
+    public function submitUserVerifyInfo(string $auth, SubmitUserVerifyInfoField $userVerifyInfoField): array
+    {
+        $url = $this->url . ZlbHttpEnum::SUBMIT_USER_VERIFY_INFO;
+        $data = $userVerifyInfoField->getUserVerifyInfoData();
+        $data['auth'] = $auth;
+
+        return $this->sendRequest($url, $data, $this->sign);
+    }
+
+    /**
+     * 纯接口认证  验证码校验
+     * @param  string  $auth  个人用户注册后data返回的auth
+     * @param  string  $verifyCode 用户认证验证码
+     * @return array
+     */
+    public function submitUserVerifyCode(string $auth, string $verifyCode): array
+    {
+        $url = $this->url . ZlbHttpEnum::SUBMIT_USER_VERIFY_CODE;
+        $data = [
+            'auth' => $auth,
+            'verifyCode' => $verifyCode,
         ];
 
         return $this->sendRequest($url, $data, $this->sign);
