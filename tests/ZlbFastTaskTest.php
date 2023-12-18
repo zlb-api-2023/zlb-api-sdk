@@ -87,6 +87,51 @@ class ZlbFastTaskTest extends TestCase
 
     }
 
+    public function testPublishFastTaskV3()
+    {
+        $oldTaskInviteUserList = [
+            [
+                'realName' => '测试',
+                'amt' => 1122,// 单位分
+                'mobile' => '13333333302',
+                'note' => '测试',
+                'attachmentIds' => [
+                    "1342715461476814850"
+                ],
+                'attachmentUrl' => 'https://baidu.com',// 附件地址 非必填
+                'appid' => '',// 微信收款账户appid
+                'openid' => '',// 微信收款账户openid
+                'idCard' => '',// 身份证号码
+            ]
+        ];
+        $taskObj = [
+            'water' => rand(100000,999999),// 流水号
+            'returnUrl' => 'https://baidu.com',
+            'tradeId' => 67,// 场景
+            'title' => 'sdk-测试20210301',
+            'content' => 'sdk-测试20210301wt-测试20210301',
+            'requirement' => '不限',
+            'taskAddress' => '不限',
+            'deliveryRequirement' => '不限',
+            'isAutoInvoice' => false, // 任务完成自动开票（True:自动开票（默认）False：不自动开票）
+            'bounty' => 1122,// 单位分
+            'beginTime' => '2020-12-25 14:40:25',// 线下任务实际开始时间
+            'endTime' => '2020-12-26 14:40:25',// 线下任务实际结束时间
+        ];
+
+        $this->zlbFastTask->setInviteUserList($oldTaskInviteUserList)->setTaskObj($taskObj);
+
+        $response = $this->zlbFastTask->publishFastTaskV3();
+
+        echo json_encode($response,JSON_UNESCAPED_UNICODE);
+
+        $this->assertArrayHasKey('code', $response);
+        $this->assertEquals(10000, $response['code']);
+        $this->assertArrayHasKey('data', $response);
+        $this->assertArrayHasKey('taskId', $response['data']);
+
+    }
+
     public function testGetPaymentDocument()
     {
         $response = $this->zlbFastTask->getPaymentDocument($this->auth, $this->taskId);

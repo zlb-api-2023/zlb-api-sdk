@@ -9,6 +9,9 @@ class ZlbHttpEnum
     // 发布极速任务
     const PUBLISH_FAST_TASK = '/task/api/v2/publishOldTask';
 
+    // 发布极速任务V3
+    const PUBLISH_FAST_TASK_V3 = '/task/api/v3/publishOldTask';
+
     // 上传文件
     const GET_FILE_UPLOAD = '/fe/api/file/upload';
 

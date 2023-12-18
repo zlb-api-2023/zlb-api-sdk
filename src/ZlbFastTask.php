@@ -48,6 +48,21 @@ class ZlbFastTask extends ZlbBase
     }
 
     /**
+     * 发布极速任务V3
+     * @return array
+     */
+    public function publishFastTaskV3(): array
+    {
+        $url = $this->url . ZlbHttpEnum::PUBLISH_FAST_TASK_V3;
+        $data = [
+            'taskObj' => $this->getTaskObj(),
+            'oldTaskInviteUserList' => $this->getInviteUserList(),
+        ];
+
+        return $this->sendRequest($url, $data, $this->sign);
+    }
+
+    /**
      * 获取个人用户实名信息
      * @param int $taskId 任务ID
      * @return array
