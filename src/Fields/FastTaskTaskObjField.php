@@ -64,6 +64,42 @@ trait FastTaskTaskObjField
      * @var bool 任务完成自动开票（True:自动开票（默认）False：不自动开票）
      */
     protected $isAutoInvoice = true;
+    protected $beginTime;
+
+    /**
+     * @return mixed
+     */
+    public function getBeginTime()
+    {
+        return $this->beginTime;
+    }
+
+    /**
+     * @param mixed $beginTime
+     */
+    public function setBeginTime($beginTime)
+    {
+        $this->beginTime = $beginTime;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEndTime()
+    {
+        return $this->endTime;
+    }
+
+    /**
+     * @param mixed $endTime
+     */
+    public function setEndTime($endTime)
+    {
+        $this->endTime = $endTime;
+        return $this;
+    }
+    protected $endTime;
 
     /**
      * @return int
@@ -274,6 +310,8 @@ trait FastTaskTaskObjField
             'deliveryRequirement' => $this->deliveryRequirement,
             'bounty' => $this->bounty,
             'isAutoInvoice' => $this->isAutoInvoice,
+            'beginTime' => $this->beginTime,
+            'endTime' => $this->endTime,
         ];
     }
 }

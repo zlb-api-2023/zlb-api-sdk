@@ -115,8 +115,8 @@ class ZlbFastTaskTest extends TestCase
             'deliveryRequirement' => '不限',
             'isAutoInvoice' => false, // 任务完成自动开票（True:自动开票（默认）False：不自动开票）
             'bounty' => 1122,// 单位分
-            'beginTime' => '2020-12-25 14:40:25',// 线下任务实际开始时间
-            'endTime' => '2020-12-26 14:40:25',// 线下任务实际结束时间
+            'beginTime' => '2020-12-25',// 线下任务实际开始时间
+            'endTime' => '2020-12-26',// 线下任务实际结束时间
         ];
 
         $this->zlbFastTask->setInviteUserList($oldTaskInviteUserList)->setTaskObj($taskObj);
